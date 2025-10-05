@@ -25,10 +25,6 @@ try {
                 <img
   src={oneCocktail.image}
   alt={oneCocktail.name}
-  onError={(e) => {
-    e.currentTarget.onerror = null; // avoid infinite loop
-    e.currentTarget.src = `https://placehold.co/400x400?text=${encodeURIComponent(oneCocktail.name)}`;
-  }}
 />
 
  <p>{oneCocktail.name}</p>
