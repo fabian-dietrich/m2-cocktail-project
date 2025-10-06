@@ -8,6 +8,7 @@ import { CocktailListPage } from "./pages/CocktailListPage";
 import { AddCocktailPage } from "./pages/AddCocktailPage";
 import { CocktailDetailsPage } from "./pages/CocktailDetailsPage";
 import { NavBar } from "./components/NavBar";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -21,8 +22,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/cocktails" element={<CocktailListPage/>}/>
-        <Route path="/cocktails/:id" element={<CocktailDetailsPage/>}/>
+        <Route path="/cocktails/:Id" element={<CocktailDetailsPage/>}/>
         <Route path="/add-cocktail" element={<AddCocktailPage/>}/>
+        <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
       
       <div className="card">
