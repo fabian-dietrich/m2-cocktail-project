@@ -5,3 +5,5 @@ export const CocktailDetailsPage = () => {
     <div>CocktailDetailsPage</div>
   )
 }
+
+/* testing the branches*/
