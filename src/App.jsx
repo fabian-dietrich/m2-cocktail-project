@@ -4,11 +4,11 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
-import { CocktailListPage } from "./pages/CocktailListPage";
 import { AddCocktailPage } from "./pages/AddCocktailPage";
-import { CocktailDetailsPage } from "./pages/CocktailDetailsPage";
 import { NavBar } from "./components/NavBar";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { CocktailListPage} from "./pages/CocktailListPage";
+import CocktailDetailsPage from "./pages/CocktailDetailsPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -31,9 +31,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           You have had {count} drinks. Click here for another.
         </button>
-        {/* <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p> */}
+       
       </div>
       <p className="read-the-docs">
         please drink responsibly

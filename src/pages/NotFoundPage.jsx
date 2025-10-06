@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
 
 export const NotFoundPage = () => {
   return (
-    <div>NotFoundPage</div>
-  )
-}
+    <div>
+      <h2>404 Oops!</h2>
+      <Link to="/">Back to Home</Link>
+    </div>
+  );
+};
