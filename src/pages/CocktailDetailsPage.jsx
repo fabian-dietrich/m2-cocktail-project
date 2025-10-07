@@ -8,7 +8,7 @@ function CocktailDetailsPage() {
   useEffect(() => {
     async function getOneCocktail() {
       try {
-        const response = await fetch(`/cocktails/${Id}.json`);
+        const response = await fetch(`http://localhost:5005/cocktails/${Id}`);
         const data = await response.json();
         /* confirm from Josh which is best to use when using API in a JSON, fetch or axios?*/
         console.log(data);
