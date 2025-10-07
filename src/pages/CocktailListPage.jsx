@@ -6,7 +6,8 @@ export const CocktailListPage = () => {
   useEffect(() => {
     async function getAllCocktails() {
       try {
-        const response = await fetch("/cocktails.json");
+        // const response = await fetch("/cocktails.json");
+        const response = await fetch("http://localhost:5005/cocktails");
         /* ask Josh the diff. between const data and const parsedData and when to use which*/
         const parsedData = await response.json();
         console.log(parsedData);

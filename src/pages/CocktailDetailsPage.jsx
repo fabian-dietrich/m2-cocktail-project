@@ -29,15 +29,20 @@ function CocktailDetailsPage() {
         style={{ maxWidth: 420, width: "100%", borderRadius: 8 }}
       />
       <p>
-        <b>Category:</b> {cocktail.category}
+        <b>Type:</b> {cocktail.alcoholic ? "Alcoholic" : "Non-Alcoholic"}
       </p>
       <p>
-        <b>Alcoholic:</b> {cocktail.alcoholic}
+        <b>Ingredients:</b>{" "}
       </p>
-      <p>
-        <b>Ingredients:</b>
-        {cocktail.ingredients}
-      </p>
+      <ul>
+        {cocktail.ingredients &&
+          cocktail.ingredients.map((item, index) => (
+            <li key={index}>
+              {item.measure} {item.ingredient}
+            </li>
+          ))}
+      </ul>
+
       <p>
         <b>Instructions:</b> {cocktail.instructions}
       </p>
