@@ -25,10 +25,7 @@ export const CocktailListPage = () => {
       <div className="cocktail-list">
         {cocktailsState.map((oneCocktail) => {
           return (
-            <Link
-              key={oneCocktail.id}
-              to={`http://localhost:5005/cocktails/cocktails/${oneCocktail.id}`}
-            >
+            <Link key={oneCocktail.id} to={`/cocktails/${oneCocktail.id}`}>
               <div className="cocktail-card">
                 <img src={oneCocktail.image} alt={oneCocktail.name} />
                 <p>{oneCocktail.name}</p>

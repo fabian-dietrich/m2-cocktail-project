@@ -35,9 +35,17 @@ function CocktailDetailsPage() {
         <b>Alcoholic:</b> {cocktail.alcoholic}
       </p>
       <p>
-        <b>Ingredients:</b>
-        {cocktail.ingredients}
+        <b>Ingredients:</b>{" "}
       </p>
+      <ul>
+        {cocktail.ingredients &&
+          cocktail.ingredients.map((item, index) => (
+            <li key={index}>
+              {item.measure} {item.ingredient}
+            </li>
+          ))}
+      </ul>
+
       <p>
         <b>Instructions:</b> {cocktail.instructions}
       </p>
