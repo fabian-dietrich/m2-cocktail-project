@@ -29,10 +29,7 @@ function CocktailDetailsPage() {
         style={{ maxWidth: 420, width: "100%", borderRadius: 8 }}
       />
       <p>
-        <b>Category:</b> {cocktail.category}
-      </p>
-      <p>
-        <b>Alcoholic:</b> {cocktail.alcoholic}
+        <b>Type:</b> {cocktail.alcoholic ? "Alcoholic" : "Non-Alcoholic"}
       </p>
       <p>
         <b>Ingredients:</b>{" "}
