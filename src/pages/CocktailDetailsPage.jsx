@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 function CocktailDetailsPage() {
   const [cocktail, setCocktail] = useState({});
   const { Id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getOneCocktail() {
@@ -19,6 +20,29 @@ function CocktailDetailsPage() {
     }
     getOneCocktail();
   }, [Id]);
+
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      `⚠️ Are you sure you want to delete "${cocktail.name}"?`
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`http://localhost:5005/cocktails/${Id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        console.log("Cocktail deleted!");
+        navigate("/cocktails"); 
+        console.error("Failed to delete cocktail");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="cocktailDetailsPage">
       <Link to="/cocktails">Back to Cocktails</Link>
@@ -46,6 +70,15 @@ function CocktailDetailsPage() {
       <p>
         <b>Instructions:</b> {cocktail.instructions}
       </p>
+
+      <div style={{ marginTop: "20px" }}>
+        <button onClick={handleDelete} style={{ marginRight: "10px" }}>
+          🗑️ Delete Cocktail
+        </button>
+        <Link to={`/cocktails/edit/${Id}`}>
+          <button>✏️ Edit Cocktail</button>
+        </Link>
+      </div>
     </div>
   );
 }
