@@ -19,7 +19,7 @@ export const EditCocktailPage = () => {
   useEffect(() => {
     async function getCocktail() {
       try {
-        const response = await fetch(`${API_URL}/${Id}`);
+        const response = await fetch(`${API_URL}/cocktails/${Id}`);
         const data = await response.json();
         setFormData(data);
         setLoading(false);
