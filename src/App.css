@@ -10,14 +10,13 @@ nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
-
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.active{
+.active {
   text-shadow: 5px 5px 20px white;
   color: green;
   font-size: 1.25rem;
@@ -38,7 +37,7 @@ a{
 /* stack content inside each card */
 .cocktail-card {
   display: flex;
-  flex-direction: column;     /* 👈 image on top, name beneath */
+  flex-direction: column; /* 👈 image on top, name beneath */
   align-items: center;
   text-align: center;
   gap: 10px;
@@ -48,23 +47,279 @@ a{
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   background: #fff;
-  box-shadow: 0 1px 2px rgba(0,0,0,.04);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 /* make the image “bolder” (bigger + shadow) */
 .cocktail-card img {
-  width: 140px;               /* bigger */
+  width: 140px; /* bigger */
   height: 140px;
   object-fit: cover;
   border-radius: 12px;
   background: #f3f3f3;
-  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 /* name underneath */
 .cocktail-card p {
   margin: 0;
-  font-weight: 700;           /* bold */
+  font-weight: 700; /* bold */
   font-size: 1.1rem;
   color: #111;
+}
+
+/* ===== Bubbly UI Theme ===== */
+:root {
+  --pink: #ff6fb5;
+  --sky: #7bdff2;
+  --mint: #b2f7ef;
+  --mango: #f8d34f;
+  --navy: #1f2544;
+  --foam: #fffefd; /* card surface */
+  --porcelain: #fbf8f6; /* page bg */
+  --ink: #2a2e43; /* body text */
+  --muted: #64708a;
+
+  --radius: 20px;
+  --shadow: 0 12px 30px rgba(31, 37, 68, 0.12);
+}
+
+/* Global */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Arial;
+  color: var(--ink);
+  background: radial-gradient(
+      900px 500px at 10% -10%,
+      rgba(255, 111, 181, 0.12),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 110% 0%,
+      rgba(123, 223, 242, 0.12),
+      transparent 55%
+    ),
+    var(--porcelain);
+  line-height: 1.65;
+}
+
+/* ===== Optional navbar (if you have one) ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(90deg, #1f2544, #2a3160);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+.navbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+}
+.navbar a {
+  color: #eaf6ff;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.06s ease;
+}
+.navbar a:hover {
+  background: rgba(123, 223, 242, 0.18);
+  color: #fff;
+}
+.navbar a[aria-current="page"] {
+  background: rgba(255, 111, 181, 0.22);
+  color: #fff;
+}
+
+/* ===== Page shell ===== */
+.about-container {
+  max-width: 960px;
+  margin: 48px auto 72px;
+  padding: 0 18px;
+}
+
+/* Title */
+.about-container h1 {
+  text-align: center;
+  font-size: clamp(30px, 4.4vw, 52px);
+  margin: 6px 0 10px;
+  color: var(--navy);
+  font-weight: 900;
+  letter-spacing: 0.3px;
+}
+.about-container h1::after {
+  content: "";
+  display: block;
+  width: 180px;
+  height: 10px;
+  margin: 12px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--pink), var(--mango), var(--sky));
+  filter: saturate(110%);
+  opacity: 0.9;
+}
+
+/* Intro */
+.about-intro p {
+  max-width: 70ch;
+  margin: 8px auto 36px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Section heading */
+.about-team h2 {
+  text-align: center;
+  font-size: clamp(22px, 3.5vw, 34px);
+  margin: 10px 0 22px;
+  color: var(--navy);
+}
+
+/* ===== Cards ===== */
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.member {
+  background: var(--foam);
+  border: 2px solid transparent; /* will get gradient border via bg */
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  background-image: linear-gradient(var(--foam), var(--foam)),
+    /* card */
+      linear-gradient(
+        120deg,
+        rgba(255, 111, 181, 0.75),
+        rgba(123, 223, 242, 0.75)
+      );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+.member:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 44px rgba(31, 37, 68, 0.18);
+  filter: saturate(103%);
+}
+
+.member h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: var(--navy);
+}
+.member p {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+/* Fun accent tabs on each card */
+.member-1 {
+  position: relative;
+}
+.member-1::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 22px;
+  width: 86px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--pink);
+  box-shadow: 0 8px 18px rgba(255, 111, 181, 0.35);
+}
+.member-2 {
+  position: relative;
+}
+.member-2::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 22px;
+  width: 86px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--sky);
+  box-shadow: 0 8px 18px rgba(123, 223, 242, 0.35);
+}
+
+/* Links */
+a {
+  color: var(--sky);
+  font-weight: 800;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+a:hover {
+  border-color: var(--sky);
+}
+a:focus-visible {
+  outline: 3px solid var(--mint);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Optional pill buttons (CTAs) */
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  cursor: pointer;
+  border: 0;
+  background: var(--pink);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255, 111, 181, 0.25);
+  transition: transform 0.06s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+.btn:hover {
+  filter: brightness(0.97);
+  box-shadow: 0 10px 26px rgba(255, 111, 181, 0.33);
+}
+.btn-alt {
+  background: var(--sky);
+  color: #0b2233;
+  box-shadow: 0 8px 20px rgba(123, 223, 242, 0.28);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin: 36px 0 10px;
+  color: var(--muted);
+}
+footer a {
+  color: var(--pink);
+  border-color: transparent;
+}
+footer a:hover {
+  border-color: var(--pink);
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+  .team-members {
+    grid-template-columns: 1fr;
+  }
+  .member {
+    padding: 22px 18px;
+  }
 }
