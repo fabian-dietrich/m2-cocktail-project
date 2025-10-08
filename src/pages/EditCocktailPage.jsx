@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { API_URL } from "../config/config";
 
 export const EditCocktailPage = () => {
   const navigate = useNavigate();
@@ -15,11 +16,10 @@ export const EditCocktailPage = () => {
 
   const [loading, setLoading] = useState(true);
 
-  // Fetch the existing cocktail data
   useEffect(() => {
     async function getCocktail() {
       try {
-        const response = await fetch(`http://localhost:5005/cocktails/${Id}`);
+        const response = await fetch(`${API_URL}${Id}`);
         const data = await response.json();
         setFormData(data);
         setLoading(false);
@@ -61,7 +61,7 @@ export const EditCocktailPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:5005/cocktails/${Id}`, {
+      const response = await fetch(`${API_URL}/cocktails/${Id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { API_URL } from "../config/config";
 
 function CocktailDetailsPage() {
   const [cocktail, setCocktail] = useState({});
@@ -9,7 +10,7 @@ function CocktailDetailsPage() {
   useEffect(() => {
     async function getOneCocktail() {
       try {
-        const response = await fetch(`http://localhost:5005/cocktails/${Id}`);
+        const response = await fetch(`${API_URL}/cocktails/${Id}`);
         const data = await response.json();
         /* confirm from Josh which is best to use when using API in a JSON, fetch or axios?*/
         console.log(data);
@@ -29,13 +30,13 @@ function CocktailDetailsPage() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:5005/cocktails/${Id}`, {
+      const response = await fetch(`${API_URL}/cocktails/${Id}`, {
         method: "DELETE",
       });
 
       if (response.ok) {
         console.log("Cocktail deleted!");
-        navigate("/cocktails"); 
+        navigate("/cocktails");
         console.error("Failed to delete cocktail");
       }
     } catch (error) {

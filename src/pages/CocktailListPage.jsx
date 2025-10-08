@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../config/config";
 
 export const CocktailListPage = () => {
   const [cocktailsState, setCocktailsState] = useState([]);
@@ -7,7 +8,7 @@ export const CocktailListPage = () => {
     async function getAllCocktails() {
       try {
         // const response = await fetch("/cocktails.json");
-        const response = await fetch("http://localhost:5005/cocktails");
+        const response = await fetch(`${API_URL}/cocktails`);
         /* ask Josh the diff. between const data and const parsedData and when to use which*/
         const parsedData = await response.json();
         console.log(parsedData);

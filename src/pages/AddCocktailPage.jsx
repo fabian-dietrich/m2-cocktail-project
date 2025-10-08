@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { API_URL } from "../config/config";
 
 export const AddCocktailPage = () => {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ export const AddCocktailPage = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5005/cocktails", {
+      const response = await fetch(`${API_URL}/cocktails`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
