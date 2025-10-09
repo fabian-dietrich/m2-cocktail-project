@@ -4,6 +4,7 @@ import { HomePage } from "./pages/HomePage";
 import { AddCocktailPage } from "./pages/AddCocktailPage";
 import { EditCocktailPage } from "./pages/EditCocktailPage";
 import { NavBar } from "./components/NavBar";
+import { ThemeToggle } from "./components/ThemeToggle";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { CocktailListPage } from "./pages/CocktailListPage";
 import CocktailDetailsPage from "./pages/CocktailDetailsPage";
@@ -13,6 +14,7 @@ function App() {
   return (
     <>
       <NavBar />
+      <ThemeToggle/>
 
       <Routes>
         <Route path="/" element={<HomePage />} />

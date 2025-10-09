@@ -1,3 +1,48 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  /* Light mode colors (default) */
+  --bg-primary: #f5f5f5;
+  --bg-card: #fff;
+  --text-primary: #2a2e43;
+  --text-muted: #64708a;
+  --accent: rgb(229, 100, 19);
+  --accent-hover: rgb(200, 85, 15);
+  --accent-light: rgba(229, 100, 19, 0.1);
+  --border: #e5e7eb;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
+
+  /* Badge colors - light mode */
+  --badge-alcoholic-bg: #fef3c7;
+  --badge-alcoholic-text: #92400e;
+  --badge-alcoholic-border: #fcd34d;
+  --badge-mocktail-bg: #d1fae5;
+  --badge-mocktail-text: #065f46;
+  --badge-mocktail-border: #6ee7b7;
+}
+
+[data-theme="dark"] {
+  /* Dark mode colors */
+  --bg-primary: #1a1a1a;
+  --bg-card: #2a2a2a;
+  --text-primary: #f5f5f5;
+  --text-muted: #b0b0b0;
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --accent-light: rgba(139, 92, 246, 0.1);
+  --border: #404040;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
+
+  /* Badge colors - dark mode */
+  --badge-alcoholic-bg: #451a03;
+  --badge-alcoholic-text: #fde68a;
+  --badge-alcoholic-border: #78350f;
+  --badge-mocktail-bg: #064e3b;
+  --badge-mocktail-text: #a7f3d0;
+  --badge-mocktail-border: #047857;
+}
+
 /* ===== GLOBAL RESET ===== */
 * {
   box-sizing: border-box;
@@ -15,54 +60,113 @@ body {
   text-align: center;
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     Arial;
-  color: #2a2e43;
-  background: #f5f5f5;
+  color: var(--text-primary);
+  background: var(--bg-primary);
   line-height: 1.65;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ===== NAVIGATION ===== */
 nav {
-  background-color: rgb(229, 100, 19);
+  background-color: var(--accent);
   height: 10vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  transition: background-color 0.3s ease;
 }
 
 nav a {
   text-decoration: none;
   color: #fff;
   font-weight: 600;
-  padding: 8px 16px; /* ADD padding for the button effect */
-  border-radius: 8px; /* ADD rounded corners */
-  transition: all 0.2s ease; /* Changed from just color */
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
 nav a:hover {
-  color: #f5f5f5;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 nav a.active {
-  background-color: #fff; /* White background */
-  color: rgb(229, 100, 19); /* Orange text */
+  background-color: #fff;
+  color: var(--accent);
   font-size: 1.25rem;
   font-weight: bold;
 }
 
-/* ===== COCKTAIL LIST PAGE ===== */
 
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  
+  box-shadow: 0 4px 12px var(--shadow-hover);
+  transition: all 0.2s ease;
+  
+  white-space: nowrap;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow-hover);
+  background-color: var(--accent-hover);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+/* Responsive: Smaller text on mobile */
+@media (max-width: 640px) {
+  .theme-toggle {
+    font-size: 0.85rem;
+    padding: 10px 16px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* Extra small screens: Even more compact */
+@media (max-width: 480px) {
+  .theme-toggle {
+    font-size: 0.8rem;
+    padding: 8px 14px;
+  }
+}
+
+/* Optional: Hide on very small screens if it overlaps content */
+@media (max-width: 480px) {
+  .theme-toggle {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
+  }
+}
+
+/* ===== COCKTAIL LIST PAGE ===== */
 .cocktail-list {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  flex-direction: column;
   gap: 24px;
   padding: 16px 16px 48px 16px;
-}
-
-.cocktail-list a {
-  text-decoration: none;
 }
 
 .cocktail-card {
@@ -75,16 +179,18 @@ nav a.active {
   margin: 0;
   width: 100%;
   max-width: 540px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
   border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--bg-card);
+  box-shadow: 0 2px 4px var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.3s ease, border-color 0.3s ease;
+  text-decoration: none;
 }
 
 .cocktail-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px var(--shadow-hover);
 }
 
 .cocktail-card img {
@@ -92,37 +198,138 @@ nav a.active {
   height: 140px;
   object-fit: cover;
   border-radius: 12px;
-  background: #f3f3f3;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  background: var(--bg-primary);
+  box-shadow: 0 6px 16px var(--shadow);
 }
 
 .cocktail-card p {
   margin: 0;
   font-weight: 700;
   font-size: 1.1rem;
-  color: #111;
+  color: var(--text-primary);
+}
+
+/* ===== HOME PAGE ===== */
+.about-container {
+  max-width: 960px;
+  margin: 48px auto 72px;
+  padding: 0 18px;
+}
+
+.about-container h1 {
+  text-align: center;
+  font-size: clamp(30px, 4.4vw, 52px);
+  margin: 6px 0 10px;
+  color: var(--text-primary);
+  font-weight: 900;
+  letter-spacing: 0.3px;
+}
+
+.about-container h1::after {
+  content: "";
+  display: block;
+  width: 180px;
+  height: 4px;
+  margin: 12px auto 0;
+  border-radius: 4px;
+  background: var(--accent);
+  transition: background-color 0.3s ease;
+}
+
+.about-intro p {
+  max-width: 70ch;
+  margin: 8px auto 36px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.about-team h2 {
+  text-align: center;
+  font-size: clamp(22px, 3.5vw, 34px);
+  margin: 10px 0 22px;
+  color: var(--text-primary);
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.member {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 26px 22px;
+  box-shadow: 0 2px 8px var(--shadow);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.member:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px var(--shadow-hover);
+}
+
+.member h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: var(--text-primary);
+}
+
+.member p {
+  margin: 0 0 14px;
+  color: var(--text-muted);
+}
+
+.about-container a {
+  color: var(--accent);
+  font-weight: 800;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.about-container a:hover {
+  border-color: var(--accent);
+}
+
+footer {
+  text-align: center;
+  margin: 36px 0 10px;
+  color: var(--text-muted);
+}
+
+footer a {
+  color: var(--accent);
+  border-color: transparent;
+}
+
+footer a:hover {
+  border-color: var(--accent);
 }
 
 /* ===== FORM PAGES (Add/Edit Cocktail) ===== */
-
 .form-container {
-  max-width: 600px;
+  max-width: 540px;
   margin: 32px auto;
   padding: 0 16px;
 }
 
 .form-card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .form-card h2 {
   margin-top: 0;
   margin-bottom: 24px;
-  color: #2a2e43;
+  color: var(--text-primary);
   text-align: center;
 }
 
@@ -134,7 +341,7 @@ nav a.active {
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #2a2e43;
+  color: var(--text-primary);
   text-align: left;
 }
 
@@ -142,17 +349,23 @@ nav a.active {
 .form-card textarea {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
   border-radius: 6px;
   font-family: inherit;
   font-size: 1rem;
-  resize: vertical;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  transition: border-color 0.2s ease, background-color 0.3s ease;
 }
 
 .form-card input[type="text"]:focus,
 .form-card textarea:focus {
   outline: none;
-  border-color: rgb(229, 100, 19);
+  border-color: var(--accent);
+}
+
+.form-card textarea {
+  resize: vertical;
 }
 
 .form-card input[type="checkbox"] {
@@ -162,7 +375,7 @@ nav a.active {
 .form-card button {
   width: 100%;
   padding: 12px;
-  background-color: rgb(229, 100, 19);
+  background-color: var(--accent);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -173,14 +386,14 @@ nav a.active {
 }
 
 .form-card button:hover {
-  background-color: rgb(200, 85, 15);
+  background-color: var(--accent-hover);
 }
 
 .form-card button[type="button"] {
   width: auto;
   padding: 8px 16px;
   margin-right: 8px;
-  background-color: #64708a;
+  background-color: var(--text-muted);
   font-size: 0.9rem;
 }
 
@@ -207,13 +420,13 @@ nav a.active {
 }
 
 .details-card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-
 
 .details-header {
   display: flex;
@@ -226,6 +439,7 @@ nav a.active {
   margin: 0;
   text-align: left;
   flex: 1;
+  color: var(--text-primary);
 }
 
 .badge {
@@ -237,27 +451,21 @@ nav a.active {
   letter-spacing: 0.5px;
   white-space: nowrap;
   margin-left: 16px;
-  margin-top: 8px;
+  margin-top: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .badge-alcoholic {
-  background-color: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fcd34d;
+  background-color: var(--badge-alcoholic-bg);
+  color: var(--badge-alcoholic-text);
+  border: 1px solid var(--badge-alcoholic-border);
 }
 
 .badge-mocktail {
-  background-color: #d1fae5;
-  color: #065f46;
-  border: 1px solid #6ee7b7;
-}
-
-
-.details-card h1 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  color: #2a2e43;
-  text-align: center;
+  background-color: var(--badge-mocktail-bg);
+  color: var(--badge-mocktail-text);
+  border: 1px solid var(--badge-mocktail-border);
 }
 
 .details-card img {
@@ -271,18 +479,18 @@ nav a.active {
 .details-card p {
   text-align: left;
   margin-bottom: 16px;
-  color: #2a2e43;
+  color: var(--text-primary);
 }
 
 .details-card ul {
   text-align: left;
   margin-bottom: 16px;
-  color: #2a2e43;
+  color: var(--text-primary);
 }
 
 .details-card button {
   padding: 10px 20px;
-  background-color: rgb(229, 100, 19);
+  background-color: var(--accent);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -293,105 +501,20 @@ nav a.active {
 }
 
 .details-card button:hover {
-  background-color: rgb(200, 85, 15);
+  background-color: var(--accent-hover);
 }
 
 .back-link {
   display: inline-block;
   margin-bottom: 16px;
-  color: rgb(229, 100, 19);
+  color: var(--accent);
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .back-link:hover {
   text-decoration: underline;
-}
-
-/* ===== HOME PAGE ===== */
-.about-container {
-  max-width: 960px;
-  margin: 48px auto 72px;
-  padding: 0 18px;
-}
-
-.about-container h1 {
-  text-align: center;
-  font-size: clamp(30px, 4.4vw, 52px);
-  margin: 6px 0 10px;
-  color: #2a2e43;
-  font-weight: 900;
-  letter-spacing: 0.3px;
-}
-
-.about-container h1::after {
-  content: "";
-  display: block;
-  width: 180px;
-  height: 4px;
-  margin: 12px auto 0;
-  border-radius: 4px;
-  background: rgb(229, 100, 19);
-}
-
-.about-intro p {
-  max-width: 70ch;
-  margin: 8px auto 36px;
-  text-align: center;
-  color: #64708a;
-}
-
-.about-team h2 {
-  text-align: center;
-  font-size: clamp(22px, 3.5vw, 34px);
-  margin: 10px 0 22px;
-  color: #2a2e43;
-}
-
-/* Team member cards */
-.team-members {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-}
-
-.member {
-  background: #fff;
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 26px 22px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.member:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-.member h3 {
-  margin: 0 0 8px;
-  font-size: 20px;
-  color: #2a2e43;
-}
-
-.member p {
-  margin: 0 0 14px;
-  color: #64708a;
-}
-
-/* HomePage links & footer */
-.about-container a {
-  color: rgb(229, 100, 19);
-  font-weight: 800;
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
-.about-container a:hover {
-  border-color: rgb(229, 100, 19);
 }
 
 /* ===== RESPONSIVE ===== */
