@@ -19,7 +19,7 @@ The goal: to learn React, routing, and API integration through a fun and practic
 - ➕ Add new cocktails
 - ✏️ Edit existing cocktails
 - ❌ Delete cocktails
-- ⚙️ Uses `fetch` and `axios` for API requests
+- ⚙️ Uses `async` and `await` for API requests
 - 🧾 Mock backend JSON API (stored locally or with JSON Server)
 
 ---
