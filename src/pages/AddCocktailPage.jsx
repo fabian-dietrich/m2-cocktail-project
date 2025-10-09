@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { API_URL } from "../config/config";
+import {  API_URL } from "../config/config"
 
 export const AddCocktailPage = () => {
   const navigate = useNavigate();
@@ -69,7 +69,8 @@ export const AddCocktailPage = () => {
   };
 
   return (
-    <div className="add-cocktail-page">
+  <div className="form-container">
+        <div className="form-card">
       <h2>Add A Cocktail</h2>
 
       <form onSubmit={handleSubmit}>
@@ -122,42 +123,43 @@ export const AddCocktailPage = () => {
           />
         </div>
 
-        <div>
-          <h3>Ingredients</h3>
-          {formData.ingredients.map((item, index) => (
-            <div key={index} style={{ marginBottom: "10px" }}>
-              <input
-                type="text"
-                placeholder="Ingredient"
-                value={item.ingredient}
-                onChange={(e) =>
-                  handleIngredientChange(index, "ingredient", e.target.value)
-                }
-                required
-              />
-              <input
-                type="text"
-                placeholder="Measure"
-                value={item.measure}
-                onChange={(e) =>
-                  handleIngredientChange(index, "measure", e.target.value)
-                }
-                required
-              />
-              {formData.ingredients.length > 1 && (
-                <button type="button" onClick={() => removeIngredient(index)}>
-                  Remove
-                </button>
-              )}
-            </div>
-          ))}
-          <button type="button" onClick={addIngredient}>
-            Add Ingredient
-          </button>
-        </div>
+<div>
+  <h3>Ingredients</h3>
+  {formData.ingredients.map((item, index) => (
+    <div key={index} className="ingredient-row">
+      <input
+        type="text"
+        placeholder="Ingredient"
+        value={item.ingredient}
+        onChange={(e) =>
+          handleIngredientChange(index, "ingredient", e.target.value)
+        }
+        required
+      />
+      <input
+        type="text"
+        placeholder="Measure"
+        value={item.measure}
+        onChange={(e) =>
+          handleIngredientChange(index, "measure", e.target.value)
+        }
+        required
+      />
+      {formData.ingredients.length > 1 && (
+        <button type="button" onClick={() => removeIngredient(index)}>
+          Remove
+        </button>
+      )}
+    </div>
+  ))}
+  <button type="button" onClick={addIngredient}>
+    Add Ingredient
+  </button>
+</div>
 
         <button type="submit">Add Cocktail 🍸 </button>
       </form>
+      </div>
     </div>
   );
 };

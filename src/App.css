@@ -1,9 +1,26 @@
-body {
-  text-align: center;
-  padding: 0;
-  margin: 0;
+/* ===== GLOBAL RESET ===== */
+* {
+  box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Arial;
+  color: #2a2e43;
+  background: #f5f5f5;
+  line-height: 1.65;
+}
+
+/* ===== NAVIGATION ===== */
 nav {
   background-color: rgb(229, 100, 19);
   height: 10vh;
@@ -12,47 +29,66 @@ nav {
   align-items: center;
 }
 
-a {
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 16px; /* ADD padding for the button effect */
+  border-radius: 8px; /* ADD rounded corners */
+  transition: all 0.2s ease; /* Changed from just color */
+}
+
+nav a:hover {
+  color: #f5f5f5;
+}
+
+nav a.active {
+  background-color: #fff; /* White background */
+  color: rgb(229, 100, 19); /* Orange text */
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* ===== COCKTAIL LIST PAGE ===== */
+
+.cocktail-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 16px 48px 16px;
+}
+
+.cocktail-list a {
   text-decoration: none;
 }
 
-.active {
-  text-shadow: 5px 5px 20px white;
-  color: green;
-  font-size: 1.25rem;
-}
-
-/* suggested styling from gpt*/
-
-/* container (optional, just for nice spacing) */
-.cocktail-list {
-  max-width: 720px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 0 16px;
-}
-
-/* stack content inside each card */
 .cocktail-card {
   display: flex;
-  flex-direction: column; /* 👈 image on top, name beneath */
+  flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 10px;
   padding: 16px;
-  margin: 0 auto;
+  margin: 0;
   width: 100%;
+  max-width: 540px;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* make the image “bolder” (bigger + shadow) */
+.cocktail-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 .cocktail-card img {
-  width: 140px; /* bigger */
+  width: 140px;
   height: 140px;
   object-fit: cover;
   border-radius: 12px;
@@ -60,136 +96,259 @@ a {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-/* name underneath */
 .cocktail-card p {
   margin: 0;
-  font-weight: 700; /* bold */
+  font-weight: 700;
   font-size: 1.1rem;
   color: #111;
 }
 
-/* ===== Bubbly UI Theme ===== */
-:root {
-  --pink: #ff6fb5;
-  --sky: #7bdff2;
-  --mint: #b2f7ef;
-  --mango: #f8d34f;
-  --navy: #1f2544;
-  --foam: #fffefd; /* card surface */
-  --porcelain: #fbf8f6; /* page bg */
-  --ink: #2a2e43; /* body text */
-  --muted: #64708a;
+/* ===== FORM PAGES (Add/Edit Cocktail) ===== */
 
-  --radius: 20px;
-  --shadow: 0 12px 30px rgba(31, 37, 68, 0.12);
+.form-container {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 0 16px;
 }
 
-/* Global */
-* {
-  box-sizing: border-box;
-}
-html,
-body,
-#root {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    Arial;
-  color: var(--ink);
-  background: radial-gradient(
-      900px 500px at 10% -10%,
-      rgba(255, 111, 181, 0.12),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 500px at 110% 0%,
-      rgba(123, 223, 242, 0.12),
-      transparent 55%
-    ),
-    var(--porcelain);
-  line-height: 1.65;
+.form-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== Optional navbar (if you have one) ===== */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: linear-gradient(90deg, #1f2544, #2a3160);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+.form-card h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: #2a2e43;
+  text-align: center;
 }
-.navbar-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 12px 16px;
+
+.form-card form > div {
+  margin-bottom: 20px;
+}
+
+.form-card label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2a2e43;
+  text-align: left;
+}
+
+.form-card input[type="text"],
+.form-card textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.form-card input[type="text"]:focus,
+.form-card textarea:focus {
+  outline: none;
+  border-color: rgb(229, 100, 19);
+}
+
+.form-card input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.form-card button {
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(229, 100, 19);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-card button:hover {
+  background-color: rgb(200, 85, 15);
+}
+
+.form-card button[type="button"] {
+  width: auto;
+  padding: 8px 16px;
+  margin-right: 8px;
+  background-color: #64708a;
+  font-size: 0.9rem;
+}
+
+.form-card button[type="button"]:hover {
+  background-color: #4a5568;
+}
+
+.ingredient-row {
   display: flex;
-  gap: 18px;
-  justify-content: center;
-}
-.navbar a {
-  color: #eaf6ff;
-  text-decoration: none;
-  font-weight: 700;
-  padding: 8px 12px;
-  border-radius: 999px;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.06s ease;
-}
-.navbar a:hover {
-  background: rgba(123, 223, 242, 0.18);
-  color: #fff;
-}
-.navbar a[aria-current="page"] {
-  background: rgba(255, 111, 181, 0.22);
-  color: #fff;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-/* ===== Page shell ===== */
+.ingredient-row input {
+  flex: 1;
+}
+
+/* ===== COCKTAIL DETAILS PAGE ===== */
+.details-container {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
+.details-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.details-header h1 {
+  margin: 0;
+  text-align: left;
+  flex: 1;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  margin-left: 16px;
+  margin-top: 8px;
+}
+
+.badge-alcoholic {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
+.badge-mocktail {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+}
+
+
+.details-card h1 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #2a2e43;
+  text-align: center;
+}
+
+.details-card img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 8px;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.details-card p {
+  text-align: left;
+  margin-bottom: 16px;
+  color: #2a2e43;
+}
+
+.details-card ul {
+  text-align: left;
+  margin-bottom: 16px;
+  color: #2a2e43;
+}
+
+.details-card button {
+  padding: 10px 20px;
+  background-color: rgb(229, 100, 19);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-right: 10px;
+}
+
+.details-card button:hover {
+  background-color: rgb(200, 85, 15);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: rgb(229, 100, 19);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== HOME PAGE ===== */
 .about-container {
   max-width: 960px;
   margin: 48px auto 72px;
   padding: 0 18px;
 }
 
-/* Title */
 .about-container h1 {
   text-align: center;
   font-size: clamp(30px, 4.4vw, 52px);
   margin: 6px 0 10px;
-  color: var(--navy);
+  color: #2a2e43;
   font-weight: 900;
   letter-spacing: 0.3px;
 }
+
 .about-container h1::after {
   content: "";
   display: block;
   width: 180px;
-  height: 10px;
+  height: 4px;
   margin: 12px auto 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--pink), var(--mango), var(--sky));
-  filter: saturate(110%);
-  opacity: 0.9;
+  border-radius: 4px;
+  background: rgb(229, 100, 19);
 }
 
-/* Intro */
 .about-intro p {
   max-width: 70ch;
   margin: 8px auto 36px;
   text-align: center;
-  color: var(--muted);
+  color: #64708a;
 }
 
-/* Section heading */
 .about-team h2 {
   text-align: center;
   font-size: clamp(22px, 3.5vw, 34px);
   margin: 10px 0 22px;
-  color: var(--navy);
+  color: #2a2e43;
 }
 
-/* ===== Cards ===== */
+/* Team member cards */
 .team-members {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -197,124 +356,45 @@ body {
 }
 
 .member {
-  background: var(--foam);
-  border: 2px solid transparent; /* will get gradient border via bg */
-  border-radius: var(--radius);
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
   padding: 26px 22px;
-  box-shadow: var(--shadow);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
-  background-image: linear-gradient(var(--foam), var(--foam)),
-    /* card */
-      linear-gradient(
-        120deg,
-        rgba(255, 111, 181, 0.75),
-        rgba(123, 223, 242, 0.75)
-      );
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .member:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 44px rgba(31, 37, 68, 0.18);
-  filter: saturate(103%);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .member h3 {
   margin: 0 0 8px;
   font-size: 20px;
-  color: var(--navy);
+  color: #2a2e43;
 }
+
 .member p {
   margin: 0 0 14px;
-  color: var(--muted);
+  color: #64708a;
 }
 
-/* Fun accent tabs on each card */
-.member-1 {
-  position: relative;
-}
-.member-1::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 22px;
-  width: 86px;
-  height: 22px;
-  border-radius: 999px;
-  background: var(--pink);
-  box-shadow: 0 8px 18px rgba(255, 111, 181, 0.35);
-}
-.member-2 {
-  position: relative;
-}
-.member-2::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 22px;
-  width: 86px;
-  height: 22px;
-  border-radius: 999px;
-  background: var(--sky);
-  box-shadow: 0 8px 18px rgba(123, 223, 242, 0.35);
-}
-
-/* Links */
-a {
-  color: var(--sky);
+/* HomePage links & footer */
+.about-container a {
+  color: rgb(229, 100, 19);
   font-weight: 800;
   text-decoration: none;
   border-bottom: 2px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-}
-a:hover {
-  border-color: var(--sky);
-}
-a:focus-visible {
-  outline: 3px solid var(--mint);
-  outline-offset: 2px;
-  border-radius: 6px;
+  transition: color 0.15s ease, border-color 0.15s ease;
 }
 
-/* Optional pill buttons (CTAs) */
-.btn {
-  display: inline-block;
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-weight: 800;
-  cursor: pointer;
-  border: 0;
-  background: var(--pink);
-  color: #fff;
-  box-shadow: 0 8px 20px rgba(255, 111, 181, 0.25);
-  transition: transform 0.06s ease, box-shadow 0.15s ease, filter 0.15s ease;
-}
-.btn:hover {
-  filter: brightness(0.97);
-  box-shadow: 0 10px 26px rgba(255, 111, 181, 0.33);
-}
-.btn-alt {
-  background: var(--sky);
-  color: #0b2233;
-  box-shadow: 0 8px 20px rgba(123, 223, 242, 0.28);
+.about-container a:hover {
+  border-color: rgb(229, 100, 19);
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  margin: 36px 0 10px;
-  color: var(--muted);
-}
-footer a {
-  color: var(--pink);
-  border-color: transparent;
-}
-footer a:hover {
-  border-color: var(--pink);
-}
-
-/* Responsive */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 760px) {
   .team-members {
     grid-template-columns: 1fr;

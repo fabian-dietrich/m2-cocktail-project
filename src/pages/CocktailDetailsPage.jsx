@@ -44,20 +44,24 @@ function CocktailDetailsPage() {
     }
   };
 
-  return (
-    <div className="cocktailDetailsPage">
-      <Link to="/cocktails">Back to Cocktails</Link>
-      <h1>{cocktail.name}</h1>
-      <img
-        src={cocktail.image}
-        alt={cocktail.name}
-        style={{ maxWidth: 420, width: "100%", borderRadius: 8 }}
-      />
+return (
+  <div className="details-container">
+    {/* <Link to="/cocktails" className="back-link">← Back to Cocktails</Link> */}
+    
+<div className="details-card">
+  <div className="details-header">
+    <h1>{cocktail.name}</h1>
+    <span className={cocktail.alcoholic ? "badge badge-alcoholic" : "badge badge-mocktail"}>
+      {cocktail.alcoholic ? "Contains Alc." : "Mocktail"}
+    </span>
+  </div>
+  
+  <img
+    src={cocktail.image}
+    alt={cocktail.name}
+  />
       <p>
-        <b>Type:</b> {cocktail.alcoholic ? "Alcoholic" : "Non-Alcoholic"}
-      </p>
-      <p>
-        <b>Ingredients:</b>{" "}
+        <b>Ingredients:</b>
       </p>
       <ul>
         {cocktail.ingredients &&
@@ -73,7 +77,7 @@ function CocktailDetailsPage() {
       </p>
 
       <div style={{ marginTop: "20px" }}>
-        <button onClick={handleDelete} style={{ marginRight: "10px" }}>
+        <button onClick={handleDelete}>
           🗑️ Delete Cocktail
         </button>
         <Link to={`/cocktails/edit/${Id}`}>
@@ -81,7 +85,8 @@ function CocktailDetailsPage() {
         </Link>
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default CocktailDetailsPage;
