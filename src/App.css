@@ -96,15 +96,13 @@ nav a.active {
   font-weight: bold;
 }
 
-
-
 /* ===== THEME TOGGLE ===== */
 .theme-toggle {
   position: fixed;
   bottom: 24px;
   right: 24px;
   z-index: 1000;
-  
+
   background: var(--accent);
   color: #fff;
   border: none;
@@ -113,10 +111,10 @@ nav a.active {
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  
+
   box-shadow: 0 4px 12px var(--shadow-hover);
   transition: all 0.2s ease;
-  
+
   white-space: nowrap;
 }
 
@@ -130,7 +128,6 @@ nav a.active {
   transform: translateY(0);
 }
 
-/* Responsive: Smaller text on mobile */
 @media (max-width: 640px) {
   .theme-toggle {
     font-size: 0.85rem;
@@ -140,7 +137,6 @@ nav a.active {
   }
 }
 
-/* Extra small screens: Even more compact */
 @media (max-width: 480px) {
   .theme-toggle {
     font-size: 0.8rem;
@@ -148,7 +144,6 @@ nav a.active {
   }
 }
 
-/* Optional: Hide on very small screens if it overlaps content */
 @media (max-width: 480px) {
   .theme-toggle {
     bottom: 16px;
@@ -167,6 +162,10 @@ nav a.active {
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
   padding: 16px 16px 48px 16px;
+}
+
+.cocktail-list a {
+  text-decoration: none;
 }
 
 .cocktail-card {
@@ -238,7 +237,7 @@ nav a.active {
 
 .about-intro p {
   max-width: 70ch;
-  margin: 8px auto 36px;
+  margin: 48px auto 36px;
   text-align: center;
   color: var(--text-muted);
 }
@@ -489,15 +488,17 @@ footer a:hover {
 }
 
 .details-card button {
-  padding: 10px 20px;
+  padding: 14px 24px;
   background-color: var(--accent);
   color: #fff;
   border: none;
   border-radius: 6px;
   font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
   margin-right: 10px;
+  margin-left: 10px;
 }
 
 .details-card button:hover {

@@ -13,12 +13,15 @@ export const HomePage = () => {
       </section>
 
       <section className="about-team">
-        <h2>Meet The Creators</h2>
+        <h2>Meet The Brewmasters</h2>
 
         <div className="team-members">
           <div className="member">
             <h3>Fabian</h3>
-            <p>Loves UI design and bringing creative ideas to life.</p>
+            <p>
+              Loves UI design and bringing creative ideas to life; a proud
+              member of Hufflepuff House 🦡
+            </p>
             <a href="https://github.com/fabian-dietrich">
               Fabian's Github Profile
             </a>
