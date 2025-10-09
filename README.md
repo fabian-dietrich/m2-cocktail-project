@@ -20,7 +20,7 @@ The goal: to learn React, routing, and API integration through a fun and practic
 - ✏️ Edit existing cocktails
 - ❌ Delete cocktails
 - ⚙️ Uses `async` and `await` for API requests
-- 🧾 Mock backend JSON API (stored locally or with JSON Server)
+- 🧾 Mock backend JSON API
 
 ---
 
@@ -28,9 +28,9 @@ The goal: to learn React, routing, and API integration through a fun and practic
 
 - **React + Vite** — frontend framework
 - **React Router DOM** — page routing
-- **Axios / Fetch** — API integration
+- **Fetch** — API integration
 - **JSON Server / Mock API** — backend simulation
-- **CSS / Tailwind / Custom styles** — styling
+
 
 ---
 
